@@ -6,7 +6,7 @@
  * writing to memory via function calls. 
  *
  * @author Hosni Adel
- * @date July 10 2020
+ * @date July 2 2020
  *
  */
 #ifndef __KEYPAD_H__

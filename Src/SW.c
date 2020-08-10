@@ -3,7 +3,7 @@
  * @brief Implemintation of configuration of sw1 and sw2
  *
  * @author Hosni Adel
- * @date July 10 2020
+ * @date July 3 2020
  *
  */
 

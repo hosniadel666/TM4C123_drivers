@@ -5,7 +5,7 @@
 * we use GPTM to achieve delay
 *
 * @author Hosni Adel
-* @date July 10 2020
+* @date July 5 2020
 *
 */
 #ifndef __DELAY_H__

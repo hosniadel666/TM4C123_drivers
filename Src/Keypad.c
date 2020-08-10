@@ -6,7 +6,7 @@
  * keypad and some functionality and
  *
  * @author Hosni Hosni
- * @date July 10 2020
+ * @date July 2 2020
  *
  */
 #include <defines.h>
@@ -46,56 +46,56 @@ uint8_t keypadIspressed(void)
 
 uint8_t keypadGetkey(void)
 {
-const uint8_t keymap[4][3] = {
-{ '1', '2', '3'},
-{ '4', '5', '6'},
-{ '7', '8', '9'},
-{ '*', '0', '#'},
-};
-uint8_t row, col;
-/* check to see any key pressed first */
-KEYPAD_ROW->DATA = 0; /* enable all rows */
+	const uint8_t keymap[4][3] = {
+	{ '1', '2', '3'},
+	{ '4', '5', '6'},
+	{ '7', '8', '9'},
+	{ '*', '0', '#'},
+	};
+	uint8_t row, col;
+	/* check to see any key pressed first */
+	KEYPAD_ROW->DATA = 0; /* enable all rows */
 
-col = KEYPAD_COL->DATA & 0xE0; /* read all columns */
-if (col == 0xE0) return 0; /* no key pressed */
-/* If a key is pressed, it gets here to find out which key. */
-/* Although it is written as an infinite loop, it will take one of the breaks or
-return in one pass.*/
-  while (1)
-  {
-      
-    row = 0;
-    KEYPAD_ROW->DATA = 0x0E; /* enable row 0 */
-    delayMs(2); /* wait for signal to settle */
-    col = KEYPAD_COL->DATA & 0xE0;
-    if (col != 0xE0) break;
+	col = KEYPAD_COL->DATA & 0xE0; /* read all columns */
+	if (col == 0xE0) return 0; /* no key pressed */
+	/* If a key is pressed, it gets here to find out which key. */
+	/* Although it is written as an infinite loop, it will take one of the breaks or
+	return in one pass.*/
+	while (1)
+	{
+		  
+		row = 0;
+		KEYPAD_ROW->DATA = 0x0E; /* enable row 0 */
+		delayMs(2); /* wait for signal to settle */
+		col = KEYPAD_COL->DATA & 0xE0;
+		if (col != 0xE0) break;
 
-    row = 1;
-    KEYPAD_ROW->DATA = 0x0D; /* enable row 1 */
-    delayMs(2); /* wait for signal to settle */
-    col = KEYPAD_COL->DATA & 0xE0;
-    if (col != 0xE0) break;
+		row = 1;
+		KEYPAD_ROW->DATA = 0x0D; /* enable row 1 */
+		delayMs(2); /* wait for signal to settle */
+		col = KEYPAD_COL->DATA & 0xE0;
+		if (col != 0xE0) break;
 
-    row = 2;
-    KEYPAD_ROW->DATA = 0x0B; /* enable row 2 */
-    delayMs(2); /* wait for signal to settle */
-    col = KEYPAD_COL->DATA & 0xE0;
-    if (col != 0xE0) break;
+		row = 2;
+		KEYPAD_ROW->DATA = 0x0B; /* enable row 2 */
+		delayMs(2); /* wait for signal to settle */
+		col = KEYPAD_COL->DATA & 0xE0;
+		if (col != 0xE0) break;
 
-    row = 3;
-    KEYPAD_ROW->DATA = 0x07; /* enable row 3 */
-    delayMs(2); /* wait for signal to settle */
-    col = KEYPAD_COL->DATA & 0xE0;
-    if (col != 0xE0) break;
+		row = 3;
+		KEYPAD_ROW->DATA = 0x07; /* enable row 3 */
+		delayMs(2); /* wait for signal to settle */
+		col = KEYPAD_COL->DATA & 0xE0;
+		if (col != 0xE0) break;
 
-    return 0; /* if no key is pressed */
-  }
+		return 0; /* if no key is pressed */
+	}
 
-  /* gets here when one of the rows has key pressed */
-  if (col == 0x60) return keymap[row][0]; /* key in column 0 */
-  if (col == 0xA0) return keymap[row][1]; /* key in column 1 */
-  if (col == 0xC0) return keymap[row][2]; /* key in column 2 */
+	/* gets here when one of the rows has key pressed */
+	if (col == 0x60) return keymap[row][0]; /* key in column 0 */
+	if (col == 0xA0) return keymap[row][1]; /* key in column 1 */
+	if (col == 0xC0) return keymap[row][2]; /* key in column 2 */
 
-  return 0;
+	return 0;
 }
  
